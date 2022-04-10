@@ -6,7 +6,7 @@ int client_working(int argc, char* argv[]) {
   try
   {
     // Check command line arguments.
-    if(argc != 5)
+    if (argc != 5)
     {
       std::cerr << "Usage: http-client-sync <host> <port> <target> "
                    "<request>\n"
@@ -20,7 +20,8 @@ int client_working(int argc, char* argv[]) {
     auto const target = argv[3];
     auto const request = argv[4];
     int version = 11;
-    std::cout << host << " " << port << " " << target << " " <<  request << std::endl;
+    std::cout << host << " " << port << " " << target << " " <<  request
+              << std::endl;
     // The io_context is required for all I/O
     net::io_context ioc;
 
@@ -64,7 +65,7 @@ int client_working(int argc, char* argv[]) {
     // not_connected happens sometimes
     // so don't bother reporting it.
     //
-    if(ec && ec != beast::errc::not_connected)
+    if (ec && ec != beast::errc::not_connected)
       throw beast::system_error{ec};
 
     // If we get here then the connection is closed gracefully
