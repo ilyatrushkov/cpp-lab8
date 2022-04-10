@@ -1,5 +1,7 @@
-#include <example.hpp>
+// Copyright 2022 Trushkov Ilya ilya.tr20002@gmail.com
 
-int main() {
-  example();
+#include "my_httpclient.hpp"
+
+int main(int argc, char* argv[]) {
+  return client_working(argc, argv);
 }
