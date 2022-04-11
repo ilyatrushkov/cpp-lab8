@@ -31,6 +31,16 @@ string(APPEND CMAKE_CXX_FLAGS " -Wshadow -Wnon-virtual-dtor")
 hunter_add_package(GTest)
 find_package(GTest CONFIG REQUIRED)
 
+hunter_add_package(Beast)
+find_package(Beast CONFIG REQUIRED)
+
+hunter_add_package(Boost COMPONENTS  thread filesystem)
+find_package(Boost CONFIG REQUIRED thread filesystem)
+find_package(Threads)
+
+hunter_add_package(nlohmann_json)
+find_package(nlohmann_json CONFIG REQUIRED)
+
 add_library(${PROJECT_NAME} STATIC
   # enum your files and delete this comment
         include/my_httpclient.hpp sources/my_httpclient.cpp)
@@ -44,7 +54,13 @@ target_include_directories(${PROJECT_NAME} PUBLIC
   "$<INSTALL_INTERFACE:include>"
 )
 
-target_link_libraries(demo ${PROJECT_NAME})
+target_link_libraries(demo ${PROJECT_NAME}
+        HTTP
+        Beast::Beast
+        Boost::filesystem
+        Boost::thread
+        GTest::gmock_main
+        nlohmann_json::nlohmann_json)
 
 if(BUILD_TESTS)
   add_executable(tests
